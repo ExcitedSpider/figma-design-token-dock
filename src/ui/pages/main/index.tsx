@@ -19,6 +19,8 @@ export const Main = (prop: {}) => {
     <div className={styles.index}>
       <div className={styles.index__title}>欢迎使用 token dock</div>
       <div>
+        请先打开 Developer Tools (opt+cmd+i);
+        <br />
         点击 tranverse, 遍历当前选中的节点;
         <br />
         点击 close, 关闭插件;
