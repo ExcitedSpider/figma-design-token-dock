@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "typeRoots": ["./node_modules/@types", "./node_modules/@figma", "src/declaration.d.ts"],
+    "jsx": "react",
+    "baseUrl": ".",
+    "paths": {
+      "@": ["src"],
+      "@/*": ["src/*"],
+      "ui": ["src/ui"],
+      "ui/*": ["src/ui/*"]
+    },
+    "plugins": [{ "name": "typescript-plugin-css-modules" }]
+  }
+}
