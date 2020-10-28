@@ -1,48 +1,67 @@
-# figma text-lint 插件
+# figma plugin template
 
-本项目是一个 [figma](https://www.figma.com/) 插件。figma 是一个基于 web 技术的设计协作工具。
+figma 插件的基本模版，从[figma text lint](https://git.woa.com/tad-ag/figma-text-lint) 插件项目中提取独立出来。可以方便地起步一个 figma 插件的编写。
 
-本插件的主要功能是检查中文语境下的文本规范。包括：
+## 使用
 
-- 英文与中文连接处需要有空格.
-- 最小字号(默认 12px，可配置).
-- 最小行高(默认中文 1.5 倍，西文 1.2 倍，暂不开放配置)
-
-## wiki 主页
-
-https://iwiki.woa.com/pages/viewpage.action?pageId=359790136
-
-## 运行本项目
-
-1. [安装 figma desktop](https://www.figma.com/downloads/)
-
-2. 在 figma desktop 中装载本插件
-
-   1. account
-   2. Plugins
-   3. In Development
-   4. create new plugin
-   5. link existing plugin
-   6. choose manifest.json
-
-3. 安装依赖
+1. fork 本项目
+2. 安装依赖并运行
 
    ```bash
    npm i
-   ```
-
-4. 执行编译
-
-   ```bash
    npm run start
    ```
 
-5. 调用插件
-   1. 在 figma desktop 中打开任意 figma 文件
-   2. 左上角菜单栏 -> Plugins -> Development -> textLint
+3. 在 [figma desktop](https://www.figma.com/downloads/)中 load 本地插件
 
-## 打包
+   > 个人空间 - plugins - create new plugin - link existing plugin
 
-```bash
-npm run build
-```
+4. 打开任意设计文件，然后运行插件
+
+   > 点击左上角 '三' 按钮 - plugins - development
+
+## 发布
+
+发布请参考 figma 社区的[插件指南](https://www.figma.com/plugin-docs/publishing/)
+
+## 为什么使用这个模版？
+
+相比较于 figma 官方提供的比较简单的模版，我们的模版有更加好的一些特性:
+
+### 公共特性
+
+- 全面 TypeScript 化
+- eslint 接入腾讯规范
+- prettier 配置
+- webpack 打包
+- 更明确的目录结构
+  > config + service + ui
+
+### UI 部分
+
+- [React](https://github.com/facebook/react) 支持 (包括 [react-router](https://github.com/ReactTraining/react-router) )
+- Post CSS 能力: [CSS Modules](https://github.com/css-modules/css-modules) 支持
+
+### Service 部分
+
+- 提供开箱即用的 handler 类
+
+  ```js
+  const handler = new MessageHandler();
+
+  handler.use(figma.ui);
+  // 处理从 ui 发来的 ‘plugin-start’ 事件
+  handler.on('plugin-start', msg => {
+    console.log('welcome~');
+  });
+  ```
+
+- 提供一些实用方法
+
+  - util.traverseNode 递归遍历一个节点
+  - util.tranverseSelectNodes 递归遍历节点数组
+  - util.findNodeIndex 获取节点在 group 中的序号
+
+## 联系我
+
+mailto: qefeng@tencent.com

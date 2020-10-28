@@ -1,3 +1,20 @@
-.title {
-  font-size: 20px;
+.index {
+  margin: 16px 20px;
+}
+.index__title {
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.index__button-bar {
+  position: absolute;
+  left: 20px;
+  right: 20px;
+  bottom: 16px;
+  display: flex;
+  justify-content: center;
+}
+
+.index__button {
+  margin: 0 10px;
 }

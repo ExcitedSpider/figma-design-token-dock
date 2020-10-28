@@ -1,54 +1,24 @@
 /* 所有页面通用的样式 */
+:root {
+  --f-primary-color: #18a0fb;
+  --f-blue: #18a0fb;
+  --f-purple: #ff00ff;
+  --f-green: #1bc47d;
+  --f-Red: #f24822;
+  --f-yellow: #ffeb00;
+  --f-white: #ffffff;
+  --f-black: #000000;
+  --f-content: rgba(0, 0, 0, 0.8);
+}
 
 body {
   font: 11px sans-serif;
+  color: var(--f-content);
   margin: 0;
-}
-
-h2 {
-  font-size: 11px;
-  font-weight: bolder;
-  margin: 0;
-}
-
-button {
-  box-sizing: border-box;
-  line-height: 30px;
-  font-size: 11px;
-  border-radius: 6px;
-  border-style: solid;
-  border-width: 1px;
-  border-color: #000000;
-  background-color: white;
-  text-align: center;
-}
-
-button.button-primary {
-  background-color: #18a0fb;
-  color: white;
-  border-style: none;
-}
-
-button:active {
-  border-color: #18a0fb;
-  box-shadow: inset 0 0 0 1px #18a0fb;
-  outline: none;
-}
-
-button:focus {
-  outline: none;
-}
-
-button.button-primary:active {
-  box-shadow: inset 0 0 0 2px rgba(0, 0, 0, 0.3);
 }
 
 a {
   cursor: pointer;
-}
-
-.hint-message {
-  color: #c4c4c4;
 }
 
 input:active {

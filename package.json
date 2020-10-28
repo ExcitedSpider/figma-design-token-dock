@@ -8,8 +8,8 @@
     "start": "webpack --mode=development --watch",
     "lint:fix": "eslint --cache --fix"
   },
-  "author": "",
-  "license": "",
+  "author": "qefeng",
+  "license": "ISC",
   "devDependencies": {
     "@figma/plugin-typings": "^1.16.1",
     "@tencent/eslint-config-tencent": "^0.7.2",

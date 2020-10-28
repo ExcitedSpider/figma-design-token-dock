@@ -3,27 +3,27 @@ declare module '*.svg' {
   export default value;
 }
 
-declare module '*.module.css' {
+declare module '*.css' {
   const classes: { [key: string]: string };
   export default classes;
 }
 
-declare module '*.module.scss' {
+declare module '*.scss' {
   const classes: { [key: string]: string };
   export default classes;
 }
 
-declare module '*.module.sass' {
+declare module '*.sass' {
   const classes: { [key: string]: string };
   export default classes;
 }
 
-declare module '*.module.less' {
+declare module '*.less' {
   const classes: { [key: string]: string };
   export default classes;
 }
 
-declare module '*.module.styl' {
+declare module '*.styl' {
   const classes: { [key: string]: string };
   export default classes;
 }
