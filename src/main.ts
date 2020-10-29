@@ -55,12 +55,20 @@ const onSelectionChange = () => {
     styles: styleDock.getStyles().map(style => {
       let icon = '';
       if (style.type === 'PAINT') {
-        icon = { ...(style as any)?.paints?.[0]?.color, a: (style as any)?.paints?.[0]?.opacity };
+        const paintStyle = style as PaintStyle;
+        const [paint] = paintStyle.paints;
+        if (paint.type === 'SOLID') {
+          icon = { ...(style as any)?.paints?.[0]?.color, a: (style as any)?.paints?.[0]?.opacity };
+        } else {
+          icon = 'gradient_icon';
+        }
       } else if (style.type === 'EFFECT') {
         icon = 'effect_icon';
       } else if (style.type === 'TEXT') {
         icon = 'text_icon';
       }
+
+      console.log(icon);
       return {
         id: style.id,
         name: style.name,
