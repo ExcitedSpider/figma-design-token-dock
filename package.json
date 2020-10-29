@@ -38,12 +38,10 @@
   "dependencies": {
     "@types/fabric": "^3.6.9",
     "@typescript-eslint/parser": "^4.6.0",
-    "fabric": "^4.2.0",
     "lodash": "^4.17.20",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.2.0",
-    "tinycolor2": "^1.4.2",
-    "transformation-matrix": "^2.4.0"
+    "tinycolor2": "^1.4.2"
   }
 }
