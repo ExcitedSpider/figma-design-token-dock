@@ -13,15 +13,18 @@ const getAngleFromMatrix = (matrix: [[number, number, number], [number, number, 
 };
 
 const calcColorString = (paint: Paint) => {
+  console.log(paint);
   if (paint.type === 'SOLID') {
-    return tinycolor.fromRatio(paint.color).toRgbString();
+    return tinycolor.fromRatio({ ...paint.color, a: paint.opacity }).toRgbString();
   }
   if (paint.type === 'GRADIENT_LINEAR') {
     const { gradientTransform, gradientStops } = paint;
     const angle = getAngleFromMatrix(gradientTransform);
     return `linear-gradient(${angle}deg, ${tinycolor
-      .fromRatio(gradientStops[0].color)
-      .toRgbString()} 0%, ${tinycolor.fromRatio(gradientStops[1].color).toRgbString()} 100%)`;
+      .fromRatio({ ...gradientStops[0].color, a: (gradientStops[0] as any)?.opacity })
+      .toRgbString()} 0%, ${tinycolor
+      .fromRatio({ ...gradientStops[1].color, a: (gradientStops[1] as any)?.opacity })
+      .toRgbString()} 100%)`;
   }
   /** TODO: 其他类型 */
   return null;

@@ -3,6 +3,7 @@ import { PLUGIN_CONFIG } from '@/config/config';
 import { tranverseSelectNodes, captureUniqueStyle } from '@/service/util/index';
 import { StyleCollection } from '@/type';
 import StyleDock from '@/service/dock/dock';
+import { debounce } from 'lodash';
 
 const handler = new MessageHandler();
 const styleDock = new StyleDock();
@@ -32,7 +33,7 @@ handler.on('message-notify', message => {
   figma.notify(message.message);
 });
 
-figma.on('selectionchange', () => {
+const onSelectionChange = () => {
   styleDock.removeStyles();
 
   const selectionStyles: StyleCollection = {
@@ -52,9 +53,9 @@ figma.on('selectionchange', () => {
   figma.ui.postMessage({
     type: 'styles-select',
     styles: styleDock.getStyles().map(style => {
-      let icon;
+      let icon = '';
       if (style.type === 'PAINT') {
-        icon = (style as any)?.paints?.[0]?.color;
+        icon = { ...(style as any)?.paints?.[0]?.color, a: (style as any)?.paints?.[0]?.opacity };
       } else if (style.type === 'EFFECT') {
         icon = 'effect_icon';
       } else if (style.type === 'TEXT') {
@@ -68,6 +69,8 @@ figma.on('selectionchange', () => {
       };
     }),
   });
-});
+};
+
+figma.on('selectionchange', debounce(onSelectionChange, 100));
 
 figma.showUI(__html__, PLUGIN_CONFIG.PAGE_SIZE);
