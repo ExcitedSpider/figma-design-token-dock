@@ -1,35 +1,36 @@
 import * as React from 'react';
 import { Button } from 'ui/components/button/button';
+import { StyleItem } from 'ui/components/style-item/style-item';
+import { StyleDisplay } from '@/type';
 
 import styles from './index.module.css';
 
-export const Main = (prop: {}) => {
-  const onClickTranverse = () => {
-    parent.postMessage({ pluginMessage: { type: 'tranverse-nodes' } }, '*');
+export const Main: React.FC<{ avaliableStyles: StyleDisplay[] }> = prop => {
+  const onClickExport = () => {
+    parent.postMessage({ pluginMessage: { type: 'export-style' } }, '*');
   };
 
-  const onClickClose = () => {
-    parent.postMessage(
-      { pluginMessage: { type: 'plugin-close', current: new Date().toString() } },
-      '*',
-    );
+  const onClickCopy = () => {
+    parent.postMessage({ pluginMessage: { type: 'copy-style' } }, '*');
   };
 
   return (
     <div className={styles.index}>
-      <div className={styles.index__title}>欢迎使用 token dock</div>
-      <div>
-        请先打开 Developer Tools (opt+cmd+i);
-        <br />
-        点击 tranverse, 遍历当前选中的节点;
-        <br />
-        点击 close, 关闭插件;
+      <div className={styles.index__title}>已选择的样式</div>
+      <div className={styles['index__style-list']}>
+        {prop.avaliableStyles.length !== 0 ? (
+          prop.avaliableStyles.map(style => <StyleItem key={style.id} {...style}></StyleItem>)
+        ) : (
+          <div className={styles['index__style-list--empty']}>🥺 没有选择任何样式</div>
+        )}
       </div>
       <div className={styles['index__button-bar']}>
-        <Button theme="primary" className={styles['index__button']} onClick={onClickTranverse}>
-          遍历
+        <Button theme="primary" className={styles['index__button']} onClick={onClickExport}>
+          导出样式
         </Button>
-        <Button onClick={onClickClose}>关闭</Button>
+        <Button theme="primary" className={styles['index__button']} onClick={onClickCopy}>
+          复制样式
+        </Button>
       </div>
     </div>
   );

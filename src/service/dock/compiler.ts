@@ -95,7 +95,6 @@ export const textStyleToCSS = (style: TextStyle) => {
 };
 
 const calcEffectString = (effect: Effect) => {
-  console.log(effect);
   if (effect.type === 'DROP_SHADOW') {
     const { offset, radius, spread, color } = effect as any;
     return `drop-shadow(${offset.x}px,${offset.y}px,${radius}px,${spread}px,${tinycolor

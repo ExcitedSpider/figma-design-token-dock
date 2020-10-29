@@ -1,0 +1,28 @@
+.style-item {
+  display: flex;
+  cursor: pointer;
+
+  transition: background-color 0.1s ease-in-out;
+  align-items: center;
+  padding: 5px 20px;
+}
+
+.style-item:hover {
+  background-color: var(--f-hover-background);
+}
+
+.style-item > div {
+  height: 16px;
+}
+
+.style-item > div:not(:first-child) {
+  flex-grow: 1;
+  flex-basis: 0;
+}
+
+.style-item__icon {
+  width: 16px;
+  height: 16px;
+  border-radius: 8px;
+  margin-right: 10px;
+}

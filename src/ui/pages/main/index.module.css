@@ -1,16 +1,32 @@
 .index {
-  margin: 16px 20px;
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  height: calc(100% - 10px);
 }
+
 .index__title {
+  font-size: 12px;
   font-weight: 600;
-  margin-bottom: 20px;
+  margin: 10px 20px;
+}
+
+.index__style-list {
+  overflow: scroll;
+  flex-grow: 1;
+  margin-bottom: 10px;
+}
+
+.index__style-list--empty {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
 }
 
 .index__button-bar {
-  position: absolute;
-  left: 20px;
-  right: 20px;
-  bottom: 16px;
+  flex-grow: 0;
   display: flex;
   justify-content: center;
 }
