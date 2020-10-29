@@ -68,7 +68,6 @@ const onSelectionChange = () => {
         icon = 'text_icon';
       }
 
-      console.log(icon);
       return {
         id: style.id,
         name: style.name,

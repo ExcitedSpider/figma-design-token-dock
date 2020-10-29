@@ -13,7 +13,6 @@ const getAngleFromMatrix = (matrix: [[number, number, number], [number, number, 
 };
 
 const calcColorString = (paint: Paint) => {
-  console.log(paint);
   if (paint.type === 'SOLID') {
     return tinycolor.fromRatio({ ...paint.color, a: paint.opacity }).toRgbString();
   }
