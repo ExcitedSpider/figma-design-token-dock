@@ -1,18 +1,33 @@
-const config = {
-  extends: ['@tencent/eslint-config-tencent', '@tencent/eslint-config-tencent/ts', 'prettier'],
-  parser: '@typescript-eslint/parser',
-  plugins: ['@typescript-eslint', 'prettier'],
-  rules: {
-    'prettier/prettier': 'error',
-    'arrow-parens': ['error', 'as-needed'],
-  },
-  globals: {
-    figma: 'readonly',
-    __html__: 'readonly',
-    ChildrenMixin: 'readonly',
-    SceneNode: 'readonly',
-    UIAPI: 'readonly',
-  },
-};
+// eslint-disable-next-line @typescript-eslint/no-require-imports
+const prettierConfig = require('./.prettierrc.js');
 
-module.exports = config;
+module.exports = {
+  env: {
+    browser: true,
+    commonjs: true,
+    es2020: true,
+    node: true,
+  },
+  extends: [
+    '@tencent/eslint-config-tencent',
+    '@tencent/eslint-config-tencent/ts',
+    'plugin:prettier/recommended',
+    // '@typescript-eslint/parser',
+  ],
+  parserOptions: {
+    parser: '@typescript-eslint/parser',
+  },
+  plugins: ['@typescript-eslint'],
+  rules: {
+    'prettier/prettier': ['warn', prettierConfig],
+  },
+  overrides: [
+    {
+      files: ['*.ts', '*.tsx'],
+      rules: {
+        /** typescript 直接使用 tsc 检查 undef */
+        'no-undef': 'off',
+      },
+    },
+  ],
+};

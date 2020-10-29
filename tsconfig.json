@@ -1,15 +1,18 @@
 {
   "compilerOptions": {
-    "target": "es6",
-    "typeRoots": ["./node_modules/@types", "./node_modules/@figma", "src/declaration.d.ts"],
+    "module": "CommonJS",
+    "target": "ES5",
+    "lib": ["ES5", "ES2015", "ES2016", "DOM"],
+    "baseUrl": "./",
+    "noEmitOnError": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
     "jsx": "react",
-    "baseUrl": ".",
     "paths": {
       "@": ["src"],
       "@/*": ["src/*"],
       "ui": ["src/ui"],
       "ui/*": ["src/ui/*"]
-    },
-    "plugins": [{ "name": "typescript-plugin-css-modules" }]
+    }
   }
 }
