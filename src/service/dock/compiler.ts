@@ -1,5 +1,5 @@
 import tinycolor from 'tinycolor2';
-import { lowerCase } from 'lodash';
+import { camelCase } from 'lodash';
 
 /** 从 2d 变换矩阵提取角度 */
 const getAngleFromMatrix = (matrix: [[number, number, number], [number, number, number]]) => {
@@ -40,7 +40,7 @@ export const paintToCSS = (style: PaintStyle) => {
   const cssString = calcColorString(paint);
   if (paint) {
     return {
-      [style.name]: cssString,
+      [camelCase(style.name)]: cssString,
     };
   }
 
@@ -88,9 +88,9 @@ export const textStyleToCSS = (style: TextStyle) => {
 
   return {
     // [`${name}FontFamily`]: fontName.family,
-    [`${name}Weight`]: fontWeight,
-    [`${name}Size`]: `${fontSize}px`,
-    [`${name}LineHeight`]: cssLintHeight,
+    [camelCase(`${name}Weight`)]: fontWeight,
+    [camelCase(`${name}Size`)]: `${fontSize}px`,
+    [camelCase(`${name}LineHeight`)]: cssLintHeight,
   };
 };
 
@@ -122,7 +122,7 @@ export const effectStyleToCSS = (style: EffectStyle) => {
   const effectString = calcEffectString(effect);
   if (effectString) {
     return {
-      [style.name]: effectString,
+      [camelCase(style.name)]: effectString,
     };
   }
 };

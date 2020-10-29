@@ -10,7 +10,7 @@ export function downloadContent(fileName: string, content: string) {
   document.body.removeChild(hiddenLink);
 }
 
-export function copyContent(content: string, message = '已复制') {
+export function copyContent(content: string) {
   const aux = document.createElement('input');
   aux.setAttribute('value', content);
   document.body.appendChild(aux);
