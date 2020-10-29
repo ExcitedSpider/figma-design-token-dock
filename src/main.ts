@@ -33,6 +33,8 @@ handler.on('message-notify', message => {
 });
 
 figma.on('selectionchange', () => {
+  styleDock.removeStyles();
+
   const selectionStyles: StyleCollection = {
     fillStyle: [],
     effectStyle: [],
@@ -49,7 +51,7 @@ figma.on('selectionchange', () => {
 
   figma.ui.postMessage({
     type: 'styles-select',
-    styles: styleDock.getStyle().map(style => {
+    styles: styleDock.getStyles().map(style => {
       let icon;
       if (style.type === 'PAINT') {
         icon = (style as any)?.paints?.[0]?.color;

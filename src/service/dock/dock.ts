@@ -26,20 +26,22 @@ export default class {
     }
   }
 
-  public getStyle() {
+  public getStyles() {
     return this.styles.slice();
   }
 
-  public removeStyle(indexOrId: number | string) {
+  public removeStyles(indexOrId?: number | string) {
     if (typeof indexOrId === 'number') {
       this.styles.splice(indexOrId, 1);
-    } else {
+    } else if (typeof indexOrId === 'string') {
       const index = this.styles.findIndex(style => style.id === indexOrId);
       if (index) {
         this.styles.splice(index);
       } else {
         throw new Error(`Remove style failed: no style id ${indexOrId}`);
       }
+    } else {
+      this.styles = [];
     }
   }
 

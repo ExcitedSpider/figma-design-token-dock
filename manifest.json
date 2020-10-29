@@ -1,5 +1,5 @@
 {
-  "name": "figma plugin template",
+  "name": "Design Token Dock / 样式导出工具",
   "id": "903167004921142962",
   "api": "1.0.0",
   "main": "dist/code.js",
