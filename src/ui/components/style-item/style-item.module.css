@@ -13,6 +13,9 @@
 
 .style-item > div {
   height: 16px;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
 }
 
 .style-item > div:not(:first-child) {
