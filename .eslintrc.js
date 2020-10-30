@@ -1,5 +1,4 @@
 // eslint-disable-next-line @typescript-eslint/no-require-imports
-const prettierConfig = require('./.prettierrc.js');
 
 module.exports = {
   env: {
@@ -11,16 +10,12 @@ module.exports = {
   extends: [
     '@tencent/eslint-config-tencent',
     '@tencent/eslint-config-tencent/ts',
-    'plugin:prettier/recommended',
     // '@typescript-eslint/parser',
   ],
   parserOptions: {
     parser: '@typescript-eslint/parser',
   },
   plugins: ['@typescript-eslint'],
-  rules: {
-    'prettier/prettier': ['warn', prettierConfig],
-  },
   overrides: [
     {
       files: ['*.ts', '*.tsx'],

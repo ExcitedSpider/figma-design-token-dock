@@ -1,20 +1,37 @@
+import { debounce } from 'lodash';
+
 import { MessageHandler } from '@/service/handler/handler';
 import { PLUGIN_CONFIG } from '@/config/config';
 import { tranverseSelectNodes, captureUniqueStyle } from '@/service/util/index';
-import { StyleCollection } from '@/type';
+import { StyleCollection, UserSetting } from '@/type';
 import StyleDock from '@/service/dock/dock';
-import { debounce } from 'lodash';
 
 const handler = new MessageHandler();
 const styleDock = new StyleDock();
 
 handler.use(figma.ui);
-handler.on('plugin-start', msg => {
-  // noop
+handler.on('plugin-start', async (msg) => {
+  const userSetting  = await figma.clientStorage.getAsync('user-setting');
+
+  figma.ui.postMessage({
+    type: 'load-user-setting',
+    data: JSON.parse(userSetting),
+  });
 });
 
-handler.on('export-style', () => {
-  const token = styleDock.getTokenObject();
+handler.on('save-config', async (msg) => {
+  await figma.clientStorage.setAsync('user-setting', JSON.stringify(msg.data));
+
+  // 目前这个通知没有必要
+  // figma.ui.postMessage({
+  //   type: 'save-complete',
+  // });
+});
+
+handler.on('export-style', async () => {
+  const userSetting: UserSetting = JSON.parse(await figma.clientStorage.getAsync('user-setting'));
+
+  const token = styleDock.getTokenObject(userSetting);
   figma.ui.postMessage({
     type: 'token-exported',
     token,
@@ -29,11 +46,11 @@ handler.on('copy-style', () => {
   });
 });
 
-handler.on('message-notify', message => {
+handler.on('message-notify', (message) => {
   figma.notify(message.message);
 });
 
-const onSelectionChange = () => {
+const onSelectionChange = async () => {
   styleDock.removeStyles();
 
   const selectionStyles: StyleCollection = {
@@ -42,17 +59,17 @@ const onSelectionChange = () => {
     strokeStyle: [],
     textStyle: [],
   };
-  tranverseSelectNodes(node => {
+  tranverseSelectNodes((node) => {
     captureUniqueStyle(selectionStyles, node);
   }, figma.currentPage.selection);
 
-  Object.keys(selectionStyles).forEach(styleName => {
+  Object.keys(selectionStyles).forEach((styleName) => {
     styleDock.addStyle(selectionStyles[styleName]);
   });
 
   figma.ui.postMessage({
     type: 'styles-select',
-    styles: styleDock.getStyles().map(style => {
+    styles: styleDock.getStyles().map((style) => {
       let icon = '';
       if (style.type === 'PAINT') {
         const paintStyle = style as PaintStyle;
@@ -81,3 +98,12 @@ const onSelectionChange = () => {
 figma.on('selectionchange', debounce(onSelectionChange, 100));
 
 figma.showUI(__html__, PLUGIN_CONFIG.PAGE_SIZE);
+
+switch (figma.command) {
+  case 'config-plugin':
+    figma.ui.postMessage({ type: 'redirect', path: '/config' });
+    break;
+
+  default:
+    break;
+}

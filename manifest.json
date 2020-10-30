@@ -3,5 +3,9 @@
   "id": "903167004921142962",
   "api": "1.0.0",
   "main": "dist/code.js",
-  "ui": "dist/ui.html"
+  "ui": "dist/ui.html",
+  "menu": [
+    { "name": "Launch / 启动", "command": "launch-plugin" },
+    { "name": "Settings / 设置", "command": "config-plugin" }
+  ]
 }

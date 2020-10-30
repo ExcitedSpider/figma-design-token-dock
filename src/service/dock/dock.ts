@@ -1,14 +1,15 @@
+import { UserSetting } from '@/type';
 import { paintToCSS, textStyleToCSS, effectStyleToCSS } from './compiler';
 
-const getTokenObjByType = (style: BaseStyle) => {
+const getTokenObjByType = (style: BaseStyle, opt?: UserSetting) => {
   if (style.type === 'PAINT') {
-    return paintToCSS(style as PaintStyle);
+    return paintToCSS(style as PaintStyle, opt);
   }
   if (style.type === 'TEXT') {
-    return textStyleToCSS(style as TextStyle);
+    return textStyleToCSS(style as TextStyle, opt);
   }
   if (style.type === 'EFFECT') {
-    return effectStyleToCSS(style as EffectStyle);
+    return effectStyleToCSS(style as EffectStyle, opt);
   }
 };
 
@@ -45,12 +46,13 @@ export default class {
     }
   }
 
-  public getTokenObject() {
+  public getTokenObject(opt: UserSetting = { tokenNameSource: 'name' }) {
     let tokenObj = {};
-    this.styles.forEach(style => {
+
+    this.styles.forEach((style) => {
       tokenObj = {
         ...tokenObj,
-        ...getTokenObjByType(style),
+        ...getTokenObjByType(style, opt),
       };
     });
     return tokenObj;

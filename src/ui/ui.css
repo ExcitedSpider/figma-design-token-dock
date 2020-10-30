@@ -33,3 +33,9 @@ input {
 input::placeholder {
   color: rgba(0, 0, 0, 0.3);
 }
+
+input[type='radio'] {
+  margin: 0;
+  margin-right: 5px;
+  vertical-align: sub;
+}

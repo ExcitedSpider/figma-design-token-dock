@@ -11,3 +11,7 @@ export type StyleDisplay = {
   type: string;
   id: string;
 };
+
+export type UserSetting = {
+  tokenNameSource: 'name' | 'description';
+};

@@ -1,0 +1,39 @@
+.config {
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  height: calc(100% - 10px);
+  margin: 0 20px;
+}
+
+.config__title {
+  font-size: 12px;
+  font-weight: 600;
+  margin: 10px 0;
+}
+
+.config__section_title {
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.config__main-list {
+  overflow: scroll;
+  flex-grow: 1;
+  margin-bottom: 10px;
+}
+
+.config__list-item {
+  margin-bottom: 4px;
+}
+
+.config__button-bar {
+  flex-grow: 0;
+  display: flex;
+  justify-content: center;
+}
+
+.config__button {
+  margin: 0 10px;
+}

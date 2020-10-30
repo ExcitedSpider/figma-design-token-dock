@@ -1,9 +1,10 @@
 import tinycolor from 'tinycolor2';
 import { camelCase } from 'lodash';
+import { UserSetting } from '@/type';
 
 /** 从 2d 变换矩阵提取角度 */
 const getAngleFromMatrix = (matrix: [[number, number, number], [number, number, number]]) => {
-  const scaleAlpha = 1 / Math.sqrt(matrix[0][1] ** 2 + matrix[1][1] ** 2);
+  const scaleAlpha = 1 / Math.sqrt((matrix[0][1] ** 2) + (matrix[1][1] ** 2));
   const sin = matrix[0][1] / scaleAlpha;
   const radians = Math.asin(sin);
   const deg = (radians * 180) / Math.PI;
@@ -12,7 +13,7 @@ const getAngleFromMatrix = (matrix: [[number, number, number], [number, number, 
   return Math.round(deg + 90);
 };
 
-const calcColorString = (paint: Paint) => {
+const calcColorString = (paint: Paint, opt?: UserSetting) => {
   if (paint.type === 'SOLID') {
     return tinycolor.fromRatio({ ...paint.color, a: paint.opacity }).toRgbString();
   }
@@ -29,20 +30,23 @@ const calcColorString = (paint: Paint) => {
   return null;
 };
 
-export const paintToCSS = (style: PaintStyle) => {
+export const paintToCSS = (style: PaintStyle, opt?: UserSetting) => {
   const paintStyle = style as PaintStyle;
   if (paintStyle.paints.length > 1) {
     // TODO 目前仅支持导出第一个样式
-    console.warn(
-      `Paint Style ${paintStyle.name} has more than one paint. Plugin only export the first one.`,
-    );
+    console.warn(`Paint Style ${paintStyle.name} has more than one paint. Plugin only export the first one.`);
   }
   const [paint] = paintStyle.paints;
 
   const cssString = calcColorString(paint);
+
+  const tokenName =    opt.tokenNameSource === 'name'
+    ? camelCase(style.name)
+    : camelCase(style.description) || style.id;
+
   if (paint) {
     return {
-      [camelCase(style.name)]: cssString,
+      [tokenName]: cssString,
     };
   }
 
@@ -70,7 +74,7 @@ const fontWeightMapping = {
   Ultrablack: 950,
 };
 
-export const textStyleToCSS = (style: TextStyle) => {
+export const textStyleToCSS = (style: TextStyle, opt?: UserSetting) => {
   const { fontName, fontSize, lineHeight, name } = style;
 
   /** 不取 font-family，在 designToken 中没有意义 */
@@ -88,11 +92,15 @@ export const textStyleToCSS = (style: TextStyle) => {
     cssLintHeight = `${lineHeight.value}px`;
   }
 
+  const tokenName =    opt.tokenNameSource === 'name'
+    ? camelCase(style.name)
+    : camelCase(style.description) || style.id;
+
   return {
     // [`${name}FontFamily`]: fontName.family,
-    [camelCase(`${name}Weight`)]: fontWeight,
-    [camelCase(`${name}Size`)]: `${fontSize}px`,
-    [camelCase(`${name}LineHeight`)]: cssLintHeight,
+    [camelCase(`${tokenName}Weight`)]: fontWeight,
+    [camelCase(`${tokenName}Size`)]: `${fontSize}px`,
+    [camelCase(`${tokenName}LineHeight`)]: cssLintHeight,
   };
 };
 
@@ -111,20 +119,21 @@ const calcEffectString = (effect: Effect) => {
   }
 };
 
-export const effectStyleToCSS = (style: EffectStyle) => {
+export const effectStyleToCSS = (style: EffectStyle, opt?: UserSetting) => {
   if (style.effects.length > 1) {
     // TODO 目前仅支持导出第一个
-    console.warn(
-      `Paint Style ${style.name} has more than one effect. Plugin only export the first one.`,
-    );
+    console.warn(`Paint Style ${style.name} has more than one effect. Plugin only export the first one.`);
   }
 
   const [effect] = style.effects;
 
   const effectString = calcEffectString(effect);
+  const tokenName =    opt.tokenNameSource === 'name'
+    ? camelCase(style.name)
+    : camelCase(style.description) || style.id;
   if (effectString) {
     return {
-      [camelCase(style.name)]: effectString,
+      [tokenName]: effectString,
     };
   }
 };
