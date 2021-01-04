@@ -12,6 +12,7 @@ export type StyleDisplay = {
   id: string;
 };
 
-export type UserSetting = {
+export interface UserSetting {
   tokenNameSource: 'name' | 'description';
-};
+  githubToken: string;
+}

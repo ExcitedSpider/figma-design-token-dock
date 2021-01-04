@@ -46,10 +46,10 @@ export default class {
     }
   }
 
-  public getTokenObject(opt: UserSetting = { tokenNameSource: 'name' }) {
+  public getTokenObject(opt: UserSetting = { tokenNameSource: 'name', githubToken: '' }) {
     let tokenObj = {};
 
-    this.styles.forEach((style) => {
+    this.styles.forEach(style => {
       tokenObj = {
         ...tokenObj,
         ...getTokenObjByType(style, opt),

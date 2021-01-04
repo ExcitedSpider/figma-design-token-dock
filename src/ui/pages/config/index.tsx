@@ -15,11 +15,16 @@ export const Config: React.FC<{
           type: 'save-config',
           data: {
             tokenNameSource,
+            githubToken,
           },
         },
       },
       '*',
     );
+    prop.setPath('/');
+  };
+
+  const onClickCancel = () => {
     prop.setPath('/');
   };
 
@@ -29,7 +34,8 @@ export const Config: React.FC<{
 
   React.useEffect(() => {
     setTokenNameSource(prop.defaultConfig.tokenNameSource);
-  }, [prop.defaultConfig.tokenNameSource]);
+    setGithubToken(prop.defaultConfig.githubToken);
+  }, [prop.defaultConfig.tokenNameSource, prop.defaultConfig.githubToken]);
 
   return (
     <div className={styles.config}>
@@ -67,10 +73,9 @@ export const Config: React.FC<{
             id="token"
             name="source"
             value={githubToken}
-            checked={tokenNameSource === 'token'}
             onChange={val => setGithubToken(val.target.value)}
           />
-          <a 
+          <a
             href="https://docs.github.com/en/free-pro-team@latest/github/authenticating-to-github/creating-a-personal-access-token"
             target="_blank"
           >
@@ -81,6 +86,9 @@ export const Config: React.FC<{
       <div className={styles['config__button-bar']}>
         <Button theme="primary" className={styles.config__button} onClick={onClickSave}>
           Save
+        </Button>
+        <Button theme="normal" className={styles.config__button} onClick={onClickCancel}>
+          Cancel
         </Button>
       </div>
     </div>

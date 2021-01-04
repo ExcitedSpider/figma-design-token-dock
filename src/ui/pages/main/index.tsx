@@ -5,13 +5,26 @@ import { StyleDisplay } from '@/type';
 
 import styles from './index.module.scss';
 
-export const Main: React.FC<{ avaliableStyles: StyleDisplay[] }> = (prop) => {
+export const Main: React.FC<{
+  avaliableStyles: StyleDisplay[];
+  setPath: (path: string) => void;
+  accessToken: string;
+}> = prop => {
   const onClickExport = () => {
     parent.postMessage({ pluginMessage: { type: 'export-style' } }, '*');
   };
 
   const onClickCopy = () => {
     parent.postMessage({ pluginMessage: { type: 'copy-style' } }, '*');
+  };
+
+  const onClickPR = () => {
+    if (prop.accessToken) {
+      prop.setPath('/create-pr');
+    } else {
+      parent.postMessage({ pluginMessage: { type: 'message-notify', message: 'Please provide token first' } }, '*');
+      prop.setPath('/config');
+    }
   };
 
   return (
@@ -28,8 +41,11 @@ export const Main: React.FC<{ avaliableStyles: StyleDisplay[] }> = (prop) => {
         <Button theme="primary" className={styles.index__button} onClick={onClickExport}>
           Export File
         </Button>
-        <Button theme="primary" className={styles.index__button} onClick={onClickCopy}>
-          Copy
+        <Button theme="normal" className={styles.index__button} onClick={onClickCopy}>
+          Copy as Text
+        </Button>
+        <Button theme="normal" className={styles.index__button} onClick={onClickPR}>
+          Make a PR
         </Button>
       </div>
     </div>

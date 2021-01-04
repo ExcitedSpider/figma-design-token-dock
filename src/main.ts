@@ -46,6 +46,10 @@ handler.on('copy-style', () => {
   });
 });
 
+handler.on('resize-window', (resizeData: { height: number; width: number }) => {
+  figma.ui.resize(resizeData.width, resizeData.height);
+});
+
 handler.on('message-notify', message => {
   figma.notify(message.message);
 });
@@ -97,7 +101,7 @@ const onSelectionChange = async () => {
 
 figma.on('selectionchange', debounce(onSelectionChange, 100));
 
-figma.showUI(__html__, PLUGIN_CONFIG.PAGE_SIZE);
+figma.showUI(__html__, PLUGIN_CONFIG.DEFAULT_PAGE_SIZE);
 
 switch (figma.command) {
   case 'config-plugin':

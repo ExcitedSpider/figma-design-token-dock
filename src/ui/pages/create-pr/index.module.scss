@@ -1,0 +1,50 @@
+.create-pr {
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  height: calc(100% - 10px);
+}
+
+.create-pr__title {
+  font-size: 12px;
+  font-weight: 600;
+  margin: 10px 0;
+}
+
+.create-pr__title--content {
+  flex-grow: 1;
+  padding: 0 20px;
+}
+
+.create-pr__repo-config{
+  display: flex;
+  font-size: 12px;
+}
+
+input[type='text'].create-pr__input--half {
+  min-width: 30px;
+  flex-grow: 1;
+  line-height: 16px;
+  height: 16px;
+  border-style: none none solid none;
+  border-width: .5px;
+  outline: none;
+}
+
+input[type='text'].create-pr__input--half:focus {
+  outline-style: none;
+  border-color: var(--f-primary-color);
+}
+
+
+.create-pr__button-bar {
+  flex-grow: 0;
+  display: flex;
+  justify-content: center;
+}
+
+.create-pr__button {
+  margin: 0 5px;
+  min-width: 70px;
+}
