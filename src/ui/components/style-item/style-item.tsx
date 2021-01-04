@@ -8,9 +8,9 @@ import gradientIcon from 'ui/assets/gradient-icon.svg';
 import styles from './style-item.module.css';
 
 const typeDescMapping = {
-  PAINT: '颜色样式',
-  TEXT: '文字样式',
-  EFFECT: '效果样式',
+  PAINT: 'Color Style',
+  TEXT: 'Text Style',
+  EFFECT: 'Effect Style',
 };
 
 const iconMapping = {
@@ -19,7 +19,7 @@ const iconMapping = {
   gradient_icon: gradientIcon,
 };
 
-export const StyleItem: React.FC<StyleDisplay> = prop => {
+export const StyleItem: React.FC<StyleDisplay> = (prop) => {
   const { icon, name, type } = prop;
 
   const Icon = () => {

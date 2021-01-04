@@ -56,7 +56,7 @@ export const Config: React.FC<{ setPath: (path: string) => void; defaultConfig: 
       </div>
       <div className={styles['config__button-bar']}>
         <Button theme="primary" className={styles.config__button} onClick={onClickSave}>
-          保存配置
+          Save Config
         </Button>
       </div>
     </div>
