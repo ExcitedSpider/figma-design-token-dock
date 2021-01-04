@@ -8,13 +8,10 @@ module.exports = {
     node: true,
   },
   extends: [
-    '@tencent/eslint-config-tencent',
-    '@tencent/eslint-config-tencent/ts',
-    // '@typescript-eslint/parser',
+    'eslint:recommended',
+    'plugin:@typescript-eslint/recommended',
   ],
-  parserOptions: {
-    parser: '@typescript-eslint/parser',
-  },
+  parser: '@typescript-eslint/parser',
   plugins: ['@typescript-eslint'],
   overrides: [
     {
