@@ -6,7 +6,7 @@ import { downloadContent, copyContent } from 'ui/util/index';
 import { Main } from '@/ui/pages/main/index';
 import { Config } from '@/ui/pages/config/index';
 
-import './ui.css';
+import './ui.scss';
 
 let avaliableStyles: StyleDisplay[];
 let setAvaliableStyles = (styles: []) => {};

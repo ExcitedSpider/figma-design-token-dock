@@ -21,14 +21,19 @@ module.exports = (env, argv) => ({
 
       // Enables including CSS by doing "import styles from './file.css'" in your TypeScript code
       {
-        test: /\.css$/,
+        test: /\.scss$/,
         loader: [
           { loader: 'style-loader' },
           {
             loader: 'css-loader',
             options: {
-              modules: true,
+              modules: {
+                localIdentName: '[local]--[hash:base64:5]',
+              },
             },
+          },
+          {
+            loader: 'sass-loader',
           },
         ],
       },

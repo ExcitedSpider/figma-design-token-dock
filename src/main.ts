@@ -10,8 +10,8 @@ const handler = new MessageHandler();
 const styleDock = new StyleDock();
 
 handler.use(figma.ui);
-handler.on('plugin-start', async (msg) => {
-  const userSetting  = await figma.clientStorage.getAsync('user-setting');
+handler.on('plugin-start', async msg => {
+  const userSetting = await figma.clientStorage.getAsync('user-setting');
 
   figma.ui.postMessage({
     type: 'load-user-setting',
@@ -19,7 +19,7 @@ handler.on('plugin-start', async (msg) => {
   });
 });
 
-handler.on('save-config', async (msg) => {
+handler.on('save-config', async msg => {
   await figma.clientStorage.setAsync('user-setting', JSON.stringify(msg.data));
 
   // 目前这个通知没有必要
@@ -46,7 +46,7 @@ handler.on('copy-style', () => {
   });
 });
 
-handler.on('message-notify', (message) => {
+handler.on('message-notify', message => {
   figma.notify(message.message);
 });
 
@@ -59,17 +59,17 @@ const onSelectionChange = async () => {
     strokeStyle: [],
     textStyle: [],
   };
-  tranverseSelectNodes((node) => {
+  tranverseSelectNodes(node => {
     captureUniqueStyle(selectionStyles, node);
   }, figma.currentPage.selection);
 
-  Object.keys(selectionStyles).forEach((styleName) => {
+  Object.keys(selectionStyles).forEach(styleName => {
     styleDock.addStyle(selectionStyles[styleName]);
   });
 
   figma.ui.postMessage({
     type: 'styles-select',
-    styles: styleDock.getStyles().map((style) => {
+    styles: styleDock.getStyles().map(style => {
       let icon = '';
       if (style.type === 'PAINT') {
         const paintStyle = style as PaintStyle;

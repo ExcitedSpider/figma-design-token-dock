@@ -3,7 +3,7 @@ import { Button } from 'ui/components/button/button';
 import { StyleItem } from 'ui/components/style-item/style-item';
 import { StyleDisplay } from '@/type';
 
-import styles from './index.module.css';
+import styles from './index.module.scss';
 
 export const Main: React.FC<{ avaliableStyles: StyleDisplay[] }> = (prop) => {
   const onClickExport = () => {

@@ -5,7 +5,7 @@ import effectIcon from 'ui/assets/effect-icon.svg';
 import fontIcon from 'ui/assets/font-icon.svg';
 import gradientIcon from 'ui/assets/gradient-icon.svg';
 
-import styles from './style-item.module.css';
+import styles from './style-item.module.scss';
 
 const typeDescMapping = {
   PAINT: 'Color Style',

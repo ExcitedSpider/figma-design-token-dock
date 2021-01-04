@@ -39,3 +39,12 @@ input[type='radio'] {
   margin-right: 5px;
   vertical-align: sub;
 }
+
+input[type='text'] {
+  line-height: 32px;
+  width: 100%;
+}
+
+input[type='text']:focus {
+  outline: var(--f-primary-color) auto 1px;
+}

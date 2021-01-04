@@ -15,7 +15,12 @@
 
 .config__section_title {
   font-weight: 600;
-  margin-bottom: 5px;
+  margin-bottom: 10px;
+  margin-top: 20px;
+}
+.config__input-label {
+  line-height: 16px;
+  margin: 10px 0;
 }
 
 .config__main-list {
@@ -26,6 +31,8 @@
 
 .config__list-item {
   margin-bottom: 4px;
+  line-height: 16px;
+  margin: 10px 0;
 }
 
 .config__button-bar {

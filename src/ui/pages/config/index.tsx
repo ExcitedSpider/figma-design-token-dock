@@ -2,9 +2,12 @@ import * as React from 'react';
 import { Button } from 'ui/components/button/button';
 import { UserSetting } from '@/type';
 
-import styles from './index.module.css';
+import styles from './index.module.scss';
 
-export const Config: React.FC<{ setPath: (path: string) => void; defaultConfig: Partial<UserSetting> }> = (prop) => {
+export const Config: React.FC<{
+  setPath: (path: string) => void;
+  defaultConfig: Partial<UserSetting>;
+}> = prop => {
   const onClickSave = () => {
     parent.postMessage(
       {
@@ -22,15 +25,16 @@ export const Config: React.FC<{ setPath: (path: string) => void; defaultConfig: 
 
   const [tokenNameSource, setTokenNameSource] = React.useState<string>('name');
 
+  const [githubToken, setGithubToken] = React.useState<string>('');
+
   React.useEffect(() => {
     setTokenNameSource(prop.defaultConfig.tokenNameSource);
   }, [prop.defaultConfig.tokenNameSource]);
 
   return (
     <div className={styles.config}>
-      <div className={styles.config__title}>Plugin Config</div>
       <div className={styles['config__main-list']}>
-        <div className={styles.config__section_title}>Token named ...</div>
+        <div className={styles.config__section_title}>Token naming</div>
         <section className={styles['config__list-item']}>
           <input
             type="radio"
@@ -40,7 +44,9 @@ export const Config: React.FC<{ setPath: (path: string) => void; defaultConfig: 
             checked={tokenNameSource === 'name'}
             onChange={() => setTokenNameSource('name')}
           />
-          <label htmlFor="name">By style name.</label>
+          <label htmlFor="name" className={styles['config__input-label']}>
+            By style name.
+          </label>
         </section>
         <section className={styles['config__list-item']}>
           <input
@@ -53,10 +59,28 @@ export const Config: React.FC<{ setPath: (path: string) => void; defaultConfig: 
           />
           <label htmlFor="description">By style description.</label>
         </section>
+        <div className={styles.config__section_title}>Github Intergration</div>
+        <section className={styles['config__list-item']}>
+          <label htmlFor="token">Github Access Token: </label>
+          <input
+            type="text"
+            id="token"
+            name="source"
+            value={githubToken}
+            checked={tokenNameSource === 'token'}
+            onChange={val => setGithubToken(val.target.value)}
+          />
+          <a 
+            href="https://docs.github.com/en/free-pro-team@latest/github/authenticating-to-github/creating-a-personal-access-token"
+            target="_blank"
+          >
+            how to get?
+          </a>
+        </section>
       </div>
       <div className={styles['config__button-bar']}>
         <Button theme="primary" className={styles.config__button} onClick={onClickSave}>
-          Save Config
+          Save
         </Button>
       </div>
     </div>
