@@ -19,6 +19,9 @@ let setPath: (path: string) => void;
 let userSetting: UserSetting;
 let setUserSetting: (setting: UserSetting) => void;
 
+let tokenString = '';
+let setTokenString: (tokenString: string) => void;
+
 const App = () => {
   React.useEffect(() => {
     parent.postMessage({ pluginMessage: { type: 'plugin-start' } }, '*');
@@ -26,6 +29,7 @@ const App = () => {
 
   [avaliableStyles, setAvaliableStyles] = React.useState<StyleDisplay[]>([]);
   [path, setPath] = React.useState('');
+  [tokenString, setTokenString] = React.useState('');
 
   const setPathWithResize = (path: string) => {
     const pathPageSizeConfig = PLUGIN_CONFIG.PATH_PAGE_SIZE[path];
@@ -50,6 +54,7 @@ const App = () => {
           <CreatePR
             accessToken={userSetting.githubToken}
             avaliableStyles={avaliableStyles}
+            tokenString={tokenString}
             setPath={setPathWithResize}
           ></CreatePR>
         </Route>
@@ -91,6 +96,9 @@ onmessage = message => {
     const { data } = pluginMessage;
 
     setUserSetting(data);
+  } else if (pluginMessage.type === 'token-preview') {
+    const { tokenString } = pluginMessage;
+    setTokenString(tokenString);
   }
 };
 

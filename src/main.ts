@@ -46,6 +46,14 @@ handler.on('copy-style', () => {
   });
 });
 
+handler.on('preview-json', () => {
+  const token = styleDock.getTokenObject();
+  figma.ui.postMessage({
+    type: 'token-preview',
+    tokenString: JSON.stringify(token, null, 2),
+  });
+});
+
 handler.on('resize-window', (resizeData: { height: number; width: number }) => {
   figma.ui.resize(resizeData.width, resizeData.height);
 });

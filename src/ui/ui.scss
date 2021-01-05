@@ -44,6 +44,9 @@ input[type='radio'] {
 input[type='text'] {
   line-height: 32px;
   width: 100%;
+  border-color: rgba(0, 0, 0, 0.3);
+  border-radius: 2px;
+  border-width: 1px;
 }
 
 input[type='text']:focus {
