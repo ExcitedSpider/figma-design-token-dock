@@ -5,7 +5,7 @@ import { StyleDisplay, UserSetting } from '@/type';
 import { downloadContent, copyContent } from 'ui/util/index';
 import { Main } from '@/ui/pages/main/index';
 import { Config } from '@/ui/pages/config/index';
-import { CreatePR } from '@/ui/pages/create-pr/index';
+import { CommitToGH } from '@/ui/pages/commit-to-gh/index';
 import { PLUGIN_CONFIG } from '@/config/config';
 
 import './ui.scss';
@@ -35,6 +35,11 @@ const App = () => {
     const pathPageSizeConfig = PLUGIN_CONFIG.PATH_PAGE_SIZE[path];
     if (pathPageSizeConfig) {
       parent.postMessage({ pluginMessage: { type: 'resize-window', ...pathPageSizeConfig } }, '*');
+    } else {
+      parent.postMessage(
+        { pluginMessage: { type: 'resize-window', ...PLUGIN_CONFIG.DEFAULT_PAGE_SIZE } },
+        '*',
+      );
     }
     setPath(path);
   };
@@ -51,12 +56,12 @@ const App = () => {
           <Config defaultConfig={userSetting} setPath={setPathWithResize}></Config>
         </Route>
         <Route path="/create-pr">
-          <CreatePR
+          <CommitToGH
             accessToken={userSetting.githubToken}
             avaliableStyles={avaliableStyles}
             tokenString={tokenString}
             setPath={setPathWithResize}
-          ></CreatePR>
+          ></CommitToGH>
         </Route>
         <Route>
           <Main

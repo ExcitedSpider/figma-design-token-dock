@@ -39,6 +39,7 @@
     "webpack-cli": "^3.3.6"
   },
   "dependencies": {
+    "@octokit/core": "^3.2.4",
     "@types/fabric": "^3.6.9",
     "lodash": "^4.17.20",
     "parse-github-url": "^1.0.2",

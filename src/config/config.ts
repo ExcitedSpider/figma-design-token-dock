@@ -5,7 +5,7 @@ export const PLUGIN_CONFIG = {
   },
   PATH_PAGE_SIZE: {
     '/create-pr': {
-      height: 466,
+      height: 470,
       width: 430,
     },
   },

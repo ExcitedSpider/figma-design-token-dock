@@ -1,0 +1,71 @@
+.commit-to-gh {
+  overflow: hidden;
+  height: calc(100% - 54px);
+  padding: 10px 20px;
+}
+
+.commit-to-gh__title {
+  font-size: 12px;
+  font-weight: 600; // semibold
+}
+
+.commit-to-gh__content {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  max-height: calc(100% - 30px);
+}
+
+.commit-to-gh__repo-config {
+  display: flex;
+  font-size: 12px;
+  margin: 10px 0 20px;
+  align-items: center;
+}
+
+.commit-to-gh__icon {
+  height: 14px;
+  width: 14px;
+  margin-right: 8px;
+}
+
+.commit-to-gh__icon--float-right {
+  float: right;
+}
+
+.commit-to-gh__access-token {
+  color: rgba(0, 0, 0, 0.3);
+  flex-grow: 1;
+  line-height: 16px;
+}
+
+.commit-to-gh__slash-divider {
+  margin: 0 8px;
+  display: inline;
+
+  &::before {
+    display: inline;
+    content: '/';
+  }
+}
+
+.commit-to-gh__button-bar {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.commit-to-gh__button {
+  margin: 0 20px;
+  min-width: 120px;
+}
+
+.commit-to-gh__json-preview {
+  overflow: scroll;
+  border-radius: 6px;
+  margin-top: 10px;
+  flex-grow: 1;
+}
