@@ -11,11 +11,6 @@ import tokenIcon from './assets/token.svg';
 import notVisibleIcon from './assets/not_visible.svg';
 import visibleIcon from './assets/visible.svg';
 
-const mockCreateIssue = (opt: any) =>
-  new Promise(res => {
-    setTimeout(() => res(opt), 1000);
-  });
-
 export const CommitToGH: React.FC<{
   avaliableStyles: StyleDisplay[];
   setPath: (path: string) => void;
@@ -42,22 +37,52 @@ export const CommitToGH: React.FC<{
 
   const onClickCommit = async () => {
     setCommitting(true);
-    const res = await createIssue({
-    // const res = await mockCreateIssue({
-      issueData: {
-        body: props.tokenString,
-      },
-      githubData: {
-        repo,
-        owner,
-        accessToken: props.accessToken,
-      },
-    });
-
-    setCommitting(false);
-
-    console.log(res);
+    try {
+      const res = await createIssue({
+        issueData: {
+          body: props.tokenString,
+        },
+        githubData: {
+          repo,
+          owner,
+          accessToken: props.accessToken,
+        },
+      });
+      if (res.status === 201) {
+        parent.postMessage(
+          {
+            pluginMessage: { type: 'message-notify', message: `🎉 Issue create success: ${res.url}` },
+          },
+          '*',
+        );
+      } else {
+        parent.postMessage(
+          {
+            pluginMessage: {
+              type: 'message-notify',
+              message: `Issue create failed: code ${res.status}`,
+            },
+          },
+          '*',
+        );
+      }
+    } catch (error) {
+      console.error(error);
+      parent.postMessage(
+        {
+          pluginMessage: {
+            type: 'message-notify',
+            message: `Issue create failed: ${error}`,
+          },
+        },
+        '*',
+      );
+    } finally {
+      setCommitting(false);
+    }
   };
+
+  const disableCommit = props.avaliableStyles.length === 0 || !owner || !repo;
 
   return (
     <div className={styles['commit-to-gh']}>
@@ -120,7 +145,7 @@ export const CommitToGH: React.FC<{
         </Button>
         <Button
           loading={committing}
-          disabled={props.avaliableStyles.length === 0}
+          disabled={disableCommit}
           theme="primary"
           className={styles['commit-to-gh__button']}
           onClick={onClickCommit}

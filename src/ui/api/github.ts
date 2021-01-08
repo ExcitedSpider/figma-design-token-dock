@@ -38,5 +38,6 @@ export const createIssue = async (option: {
     repo: githubData.repo,
     title: issueData.title ?? `[bot] figma-design-token-${new Date().getTime()}`,
     body: issueData.body,
+    labels: ['bot']
   });
 };
