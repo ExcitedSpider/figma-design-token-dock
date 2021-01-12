@@ -1,7 +1,7 @@
-import { UserSetting } from '@/type';
 import { paintToCSS, textStyleToCSS, effectStyleToCSS } from './compiler';
+import { PluginSetting } from '@/type';
 
-const getTokenObjByType = (style: BaseStyle, opt?: UserSetting) => {
+const getTokenObjByType = (style: BaseStyle, opt?: PluginSetting) => {
   if (style.type === 'PAINT') {
     return paintToCSS(style as PaintStyle, opt);
   }
@@ -46,7 +46,13 @@ export default class {
     }
   }
 
-  public getTokenObject(opt: UserSetting = { tokenNameSource: 'name', githubToken: '' }) {
+  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+  public getTokenObject(
+    opt: PluginSetting = {
+      tokenNameSource: 'name',
+      githubToken: '',
+    },
+  ) {
     let tokenObj = {};
 
     this.styles.forEach(style => {

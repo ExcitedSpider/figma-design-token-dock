@@ -12,6 +12,7 @@
   "author": "qefeng",
   "license": "ISC",
   "devDependencies": {
+    "@types/crypto-js": "^4.0.1",
     "@types/figma": "^1.0.3",
     "@types/lodash": "^4.14.161",
     "@types/node": "^14.14.5",
@@ -41,6 +42,7 @@
   "dependencies": {
     "@octokit/core": "^3.2.4",
     "@types/fabric": "^3.6.9",
+    "js-base64": "^3.6.0",
     "lodash": "^4.17.20",
     "parse-github-url": "^1.0.2",
     "react": "^16.13.1",

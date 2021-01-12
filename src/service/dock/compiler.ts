@@ -1,6 +1,7 @@
 import tinycolor from 'tinycolor2';
 import { camelCase } from 'lodash';
-import { UserSetting } from '@/type';
+import { PluginSetting } from '@/type';
+
 
 /** 从 2d 变换矩阵提取角度 */
 const getAngleFromMatrix = (matrix: [[number, number, number], [number, number, number]]) => {
@@ -13,7 +14,7 @@ const getAngleFromMatrix = (matrix: [[number, number, number], [number, number, 
   return Math.round(deg + 90);
 };
 
-const calcColorString = (paint: Paint, opt?: UserSetting) => {
+const calcColorString = (paint: Paint, opt?: PluginSetting) => {
   if (paint.type === 'SOLID') {
     return tinycolor.fromRatio({ ...paint.color, a: paint.opacity }).toRgbString();
   }
@@ -30,7 +31,7 @@ const calcColorString = (paint: Paint, opt?: UserSetting) => {
   return null;
 };
 
-export const paintToCSS = (style: PaintStyle, opt?: UserSetting) => {
+export const paintToCSS = (style: PaintStyle, opt?: PluginSetting) => {
   const paintStyle = style as PaintStyle;
   if (paintStyle.paints.length > 1) {
     // TODO 目前仅支持导出第一个样式
@@ -74,7 +75,7 @@ const fontWeightMapping = {
   Ultrablack: 950,
 };
 
-export const textStyleToCSS = (style: TextStyle, opt?: UserSetting) => {
+export const textStyleToCSS = (style: TextStyle, opt?: PluginSetting) => {
   const { fontName, fontSize, lineHeight, name } = style;
 
   /** 不取 font-family，在 designToken 中没有意义 */
@@ -119,7 +120,7 @@ const calcEffectString = (effect: Effect) => {
   }
 };
 
-export const effectStyleToCSS = (style: EffectStyle, opt?: UserSetting) => {
+export const effectStyleToCSS = (style: EffectStyle, opt?: PluginSetting) => {
   if (style.effects.length > 1) {
     // TODO 目前仅支持导出第一个
     console.warn(`Paint Style ${style.name} has more than one effect. Plugin only export the first one.`);

@@ -69,3 +69,18 @@
   margin-top: 10px;
   flex-grow: 1;
 }
+
+.commit-to-gh__info {
+  color: #b3b3b3;
+}
+
+input[type='text'].commit-to-gh__input--version {
+  width: 230px;
+}
+
+.commit-to-gh__version-pane {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-grow: 1;
+}

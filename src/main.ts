@@ -20,7 +20,10 @@ handler.on('plugin-start', async msg => {
 });
 
 handler.on('save-config', async msg => {
-  await figma.clientStorage.setAsync('user-setting', JSON.stringify(msg.data));
+  const existSetting = await figma.clientStorage.getAsync('user-setting');
+
+  const newSetting = { ...JSON.parse(existSetting), ...msg.data };
+  await figma.clientStorage.setAsync('user-setting', JSON.stringify(newSetting));
 
   // 目前这个通知没有必要
   // figma.ui.postMessage({

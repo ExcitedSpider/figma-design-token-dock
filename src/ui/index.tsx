@@ -47,6 +47,8 @@ const App = () => {
   [userSetting, setUserSetting] = React.useState<UserSetting>({
     tokenNameSource: 'name',
     githubToken: '',
+    prOwner: '',
+    prRepo: '',
   });
 
   return (
@@ -58,6 +60,8 @@ const App = () => {
         <Route path="/create-pr">
           <CommitToGH
             accessToken={userSetting.githubToken}
+            defaultOwner={userSetting.prOwner}
+            defaultRepo={userSetting.prRepo}
             avaliableStyles={avaliableStyles}
             tokenString={tokenString}
             setPath={setPathWithResize}

@@ -15,4 +15,8 @@ export type StyleDisplay = {
 export interface UserSetting {
   tokenNameSource: 'name' | 'description';
   githubToken: string;
+  prRepo: string;
+  prOwner: string;
 }
+
+export type PluginSetting = Pick<UserSetting, 'tokenNameSource' | 'githubToken'>;
