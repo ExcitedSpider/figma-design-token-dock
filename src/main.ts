@@ -49,8 +49,10 @@ handler.on('copy-style', () => {
   });
 });
 
-handler.on('preview-json', () => {
-  const token = styleDock.getTokenObject();
+handler.on('preview-json', async () => {
+  const userSetting = await figma.clientStorage.getAsync('user-setting');
+
+  const token = styleDock.getTokenObject(userSetting);
   figma.ui.postMessage({
     type: 'token-preview',
     tokenString: JSON.stringify(token, null, 2),
