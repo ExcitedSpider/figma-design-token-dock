@@ -135,7 +135,7 @@ export const CommitToGH: React.FC<{
         const { url } = await createPr({
           githubData,
           branchName: newBranch,
-          base: 'maser',
+          base: 'master',
           body: props.tokenString,
           title: `[figma automation] design token ${version}`,
         });
