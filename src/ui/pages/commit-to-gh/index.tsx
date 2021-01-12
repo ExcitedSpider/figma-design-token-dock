@@ -99,55 +99,8 @@ export const CommitToGH: React.FC<{
       owner,
       accessToken: props.accessToken,
     };
-    try {
-      const {
-        data: {
-          object: { sha },
-        },
-      } = await getMaster({
-        githubData,
-      });
-
-      const newBranch = `design-token-${new Date().getTime()}`;
-
-      const res = await createBranch({
-        githubData,
-        sha,
-        branchName: newBranch,
-      });
-
-      if (res.status === 201) {
-        const newPkg = { ...pkg, version };
-        const newPackage = JSON.stringify(newPkg);
-        const res = await getPackage({
-          githubData,
-          branch: newBranch,
-        });
-
-        await updatePackage({
-          githubData,
-          branch: newBranch,
-          content: newPackage,
-          message: '[figma automation]: update version',
-          sha: res.data.sha,
-        });
-
-        const { url } = await createPr({
-          githubData,
-          branchName: newBranch,
-          base: 'master',
-          body: props.tokenString,
-          title: `[figma automation] design token ${version}`,
-        });
-
-        showToast(`commit success: ${url}`);
-      }
-    } catch (error) {
-      console.error(error);
-      showToast(`commit failed: ${error}`);
-    } finally {
-      setCommitting(false);
-    }
+    await submitPullRequest({ githubData, pkg, version, props });
+    setCommitting(false);
   };
 
   const disableCommit = props.avaliableStyles.length === 0 || !owner || !repo;
@@ -242,3 +195,65 @@ export const CommitToGH: React.FC<{
     </div>
   );
 };
+async function submitPullRequest(options: {
+  githubData: { repo: string; owner: string; accessToken: string };
+  pkg: { version: string };
+  version: string;
+  props: React.PropsWithChildren<{
+    avaliableStyles: StyleDisplay[];
+    setPath: (path: string) => void;
+    accessToken: string;
+    tokenString: string;
+    defaultOwner: string;
+    defaultRepo: string;
+  }>;
+}) {
+  const { githubData, pkg, version, props } = options;
+  try {
+    const {
+      data: {
+        object: { sha },
+      },
+    } = await getMaster({
+      githubData,
+    });
+
+    const newBranch = `design-token-${new Date().getTime()}`;
+
+    const res = await createBranch({
+      githubData,
+      sha,
+      branchName: newBranch,
+    });
+
+    if (res.status === 201) {
+      const newPkg = { ...pkg, version };
+      const newPackage = JSON.stringify(newPkg);
+      const res = await getPackage({
+        githubData,
+        branch: newBranch,
+      });
+
+      await updatePackage({
+        githubData,
+        branch: newBranch,
+        content: newPackage,
+        message: '[figma automation]: update version',
+        sha: res.data.sha,
+      });
+
+      const { url } = await createPr({
+        githubData,
+        branchName: newBranch,
+        base: 'master',
+        body: props.tokenString,
+        title: `[figma automation] design token ${version}`,
+      });
+
+      showToast(`commit success: ${url}`);
+    }
+  } catch (error) {
+    console.error(error);
+    showToast(`commit failed: ${error}`);
+  }
+}
