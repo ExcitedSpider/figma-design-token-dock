@@ -17,7 +17,7 @@ module.exports = {
       title: 'figma-design-token-dock',
       description: 'Vue-powered Static Site Generator'
     },
-    '/zh/': {
+    '/en': {
       lang: 'zh-CN',
       title: 'figma-design-token-dock',
       description: 'Vue 驱动的静态网站生成器'
