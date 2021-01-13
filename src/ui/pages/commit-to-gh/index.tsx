@@ -228,7 +228,7 @@ async function submitPullRequest(options: {
 
     if (res.status === 201) {
       const newPkg = { ...pkg, version };
-      const newPackage = JSON.stringify(newPkg);
+      const newPackage = JSON.stringify(newPkg, null, 2);
       const res = await getPackage({
         githubData,
         branch: newBranch,
