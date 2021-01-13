@@ -5,7 +5,7 @@ const sidebarConfig = getConfig(root, { addReadMeToFirstGroup: false }).sidebar;
 
 module.exports = {
   head: [],
-  base: '/figma-design-token-dock',
+  base: '/figma-design-token-dock/',
   markdown: {
     plugins: ['markdown-it-task-lists']
   },
