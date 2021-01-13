@@ -93,6 +93,10 @@
 
   ![create pr](./assets/usage-create-pr.png)
 
+## 还有问题？
+
+- 在 [github issues](https://github.com/ExcitedSpider/figma-design-token-dock/issues/new) 提问
+
 ## 开发
 
 1. clone & install
