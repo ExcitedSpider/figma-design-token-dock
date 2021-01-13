@@ -6,6 +6,8 @@
 - 下载保存为 .json 文件
 - 发起 Github PR
 
+[Figma Plugin Link 🔗](https://www.figma.com/community/plugin/903167004921142962/Design-Token-Dock-%2F-%E6%A0%B7%E5%BC%8F%E5%AF%BC%E5%87%BA%E5%B7%A5%E5%85%B7)
+
 ## 背景
 
 - Design Token 是什么？
