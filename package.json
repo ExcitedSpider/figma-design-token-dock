@@ -7,7 +7,9 @@
     "build": "webpack --mode=production",
     "start": "webpack --mode=development --watch",
     "lint:fix": "eslint --ext .ts .js .tsx .jsx --fix src/** --no-error-on-unmatched-pattern",
-    "lint": "eslint --ext .ts .js .tsx .jsx src/** --no-error-on-unmatched-pattern"
+    "lint": "eslint --ext .ts .js .tsx .jsx src/** --no-error-on-unmatched-pattern",
+    "docs:dev": "vuepress dev docs",
+    "docs:build": "vuepress build docs"
   },
   "author": "qefeng",
   "license": "ISC",
@@ -29,6 +31,7 @@
     "eslint-plugin-prettier": "^3.1.4",
     "html-webpack-inline-source-plugin": "0.0.10",
     "html-webpack-plugin": "^3.2.0",
+    "markdown-it-task-lists": "^2.1.1",
     "prettier": "2.1.2",
     "sass": "^1.32.0",
     "sass-loader": "^10.1.0",
@@ -36,6 +39,8 @@
     "ts-loader": "^6.0.4",
     "typescript": "^3.9.7",
     "url-loader": "^2.1.0",
+    "vuepress": "^1.8.0",
+    "vuepress-bar": "^0.3.2",
     "webpack": "^4.44.1",
     "webpack-cli": "^3.3.6"
   },

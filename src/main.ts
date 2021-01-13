@@ -50,7 +50,7 @@ handler.on('copy-style', () => {
 });
 
 handler.on('preview-json', async () => {
-  const userSetting = await figma.clientStorage.getAsync('user-setting');
+  const userSetting = JSON.parse(await figma.clientStorage.getAsync('user-setting'));
 
   const token = styleDock.getTokenObject(userSetting);
   figma.ui.postMessage({
@@ -84,7 +84,7 @@ const onSelectionChange = async () => {
     styleDock.addStyle(selectionStyles[styleName]);
   });
 
-  const userSetting = await figma.clientStorage.getAsync('user-setting');
+  const userSetting = JSON.parse(await figma.clientStorage.getAsync('user-setting'));
 
   figma.ui.postMessage({
     type: 'styles-select',
@@ -106,7 +106,7 @@ const onSelectionChange = async () => {
 
       return {
         id: style.id,
-        name: userSetting.tokenNameSource === 'name' ? style.name : style.description,
+        name: userSetting.tokenNameSource === 'description' ? style.description : style.name,
         icon,
         type: style.type,
       };
