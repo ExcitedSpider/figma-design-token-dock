@@ -84,6 +84,8 @@ const onSelectionChange = async () => {
     styleDock.addStyle(selectionStyles[styleName]);
   });
 
+  const userSetting = await figma.clientStorage.getAsync('user-setting');
+
   figma.ui.postMessage({
     type: 'styles-select',
     styles: styleDock.getStyles().map(style => {
@@ -104,7 +106,7 @@ const onSelectionChange = async () => {
 
       return {
         id: style.id,
-        name: style.name,
+        name: userSetting.tokenNameSource === 'name' ? style.name : style.description,
         icon,
         type: style.type,
       };

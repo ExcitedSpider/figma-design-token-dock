@@ -3,7 +3,14 @@ import { Button } from 'ui/components/button/button';
 import { StyleDisplay } from '@/type';
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import a11yStyle from 'react-syntax-highlighter/dist/esm/styles/hljs/a11y-dark';
-import { getMaster, createBranch, getPackage, updatePackage, createPr } from '@/ui/api/github';
+import {
+  getMaster,
+  createBranch,
+  getPackage,
+  updatePackage,
+  createPr,
+  addLabels,
+} from '@/ui/api/github';
 
 import styles from './index.module.scss';
 import repoIcon from './assets/repo.svg';
@@ -242,12 +249,18 @@ async function submitPullRequest(options: {
         sha: res.data.sha,
       });
 
-      const { url } = await createPr({
+      const { url, data } = await createPr({
         githubData,
         branchName: newBranch,
         base: 'master',
         body: props.tokenString,
         title: `[figma automation] design token ${version}`,
+      });
+
+      await addLabels({
+        githubData,
+        number: data.number,
+        labels: ['figma-bot'],
       });
 
       showToast(`commit success: ${url}`);

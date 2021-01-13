@@ -136,9 +136,7 @@ export const createPr = async (option: {
   body: string;
   title?: string;
 }): Promise<
-  OctokitResponse<{
-    object: { sha: string };
-  }>
+  OctokitResponse<{ sha: string, number:string }>
 > => {
   const { githubData, branchName, ...exArgs } = option;
   const octokit = new Octokit({ auth: githubData.accessToken });
@@ -146,5 +144,20 @@ export const createPr = async (option: {
   return await octokit.request(`POST /repos/${githubData.owner}/${githubData.repo}/pulls`, {
     ...exArgs,
     head: branchName,
+  });
+};
+
+export const addLabels = async (option: {
+  githubData: GithubData;
+  number: string;
+  labels: string[];
+}): Promise<
+  OctokitResponse<{ sha: string, number:string }>
+> => {
+  const { githubData, number, labels } = option;
+  const octokit = new Octokit({ auth: githubData.accessToken });
+
+  return await octokit.request(`POST /repos/${githubData.owner}/${githubData.repo}/issues/${number}/labels`, {
+    labels,
   });
 };
