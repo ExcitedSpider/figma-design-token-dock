@@ -1,29 +1,29 @@
 declare module '*.svg' {
-  const value: any;
-  export default value;
+  const VALUE: any;
+  export default VALUE;
 }
 
 declare module '*.css' {
-  const classes: { [key: string]: string };
-  export default classes;
+  const VALUE: { [key: string]: string };
+  export default VALUE;
 }
 
 declare module '*.scss' {
-  const classes: { [key: string]: string };
-  export default classes;
+  const VALUE: { [key: string]: string };
+  export default VALUE;
 }
 
 declare module '*.sass' {
-  const classes: { [key: string]: string };
-  export default classes;
+  const VALUE: { [key: string]: string };
+  export default VALUE;
 }
 
 declare module '*.less' {
-  const classes: { [key: string]: string };
-  export default classes;
+  const VALUE: { [key: string]: string };
+  export default VALUE;
 }
 
 declare module '*.styl' {
-  const classes: { [key: string]: string };
-  export default classes;
+  const VALUE: { [key: string]: string };
+  export default VALUE;
 }

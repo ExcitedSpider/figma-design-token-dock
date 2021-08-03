@@ -2,14 +2,14 @@
 :root {
   --f-primary-color: #18a0fb;
   --f-blue: #18a0fb;
-  --f-purple: #ff00ff;
+  --f-purple: #f0f;
   --f-green: #1bc47d;
   --f-Red: #f24822;
   --f-yellow: #ffeb00;
-  --f-white: #ffffff;
-  --f-black: #000000;
-  --f-content: rgba(0, 0, 0, 0.8);
-  --f-hover-background: rgba(24, 160, 251, 0.1);
+  --f-white: #fff;
+  --f-black: #000;
+  --f-content: rgba(0, 0, 0, .8);
+  --f-hover-background: rgba(24, 160, 251, .1);
 }
 
 body {
@@ -32,7 +32,7 @@ input {
 }
 
 input::placeholder {
-  color: rgba(0, 0, 0, 0.3);
+  color: rgba(0, 0, 0, .3);
 }
 
 input[type='radio'] {
@@ -44,7 +44,7 @@ input[type='radio'] {
 input[type='text'] {
   line-height: 32px;
   width: 100%;
-  border-color: rgba(0, 0, 0, 0.3);
+  border-color: rgba(0, 0, 0, .3);
   border-radius: 2px;
   border-width: 1px;
 }

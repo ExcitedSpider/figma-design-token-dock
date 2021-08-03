@@ -8,7 +8,7 @@
   border-color: var(--f-black);
   background-color: var(--f-white);
   text-align: center;
-  transition: ease-in-out 0.2s background-color;
+  transition: ease-in-out .2s background-color;
 }
 
 .f-button:active {
@@ -24,17 +24,17 @@
 .f-button.primary {
   background-color: var(--f-primary-color);
   color: var(--f-white);
-  border-style: none;
+  // border-style: none;
 }
 
 .f-button.warn {
   background-color: var(--f-Red);
   color: var(--f-white);
-  border-style: none;
+  // border-style: none;
 }
 
 .f-button.primary:active {
-  box-shadow: inset 0 0 0 2px rgba(0, 0, 0, 0.3);
+  box-shadow: inset 0 0 0 2px rgba(0, 0, 0, .3);
 }
 
 @keyframes spin {
@@ -48,8 +48,8 @@
   }
 }
 
-button.f-button--disabled.f-button{
-  background-color: rgba(0, 0, 0, 0.3);
+button.f-button--disabled.f-button {
+  background-color: rgba(0, 0, 0, .3);
   color: white;
   position: relative;
 }
@@ -63,5 +63,5 @@ button.f-button--loading.f-button::before {
   height: 14px;
   width: 14px;
   top: 50%;
-  animation: spin linear 0.5s infinite;
+  animation: spin linear .5s infinite;
 }

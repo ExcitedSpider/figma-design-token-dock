@@ -9,11 +9,20 @@
     "lint:fix": "eslint --ext .ts .js .tsx .jsx --fix src/** --no-error-on-unmatched-pattern",
     "lint": "eslint --ext .ts .js .tsx .jsx src/** --no-error-on-unmatched-pattern",
     "docs:dev": "vuepress dev docs",
-    "docs:build": "vuepress build docs"
+    "docs:build": "vuepress build docs",
+    "lint:css": "stylelint **/*.{html,vue,css,sass,scss,less}"
+  },
+  "lint-staged": {
+    "*.{html,vue,css,sass,scss,less}": [
+      "stylelint --fix",
+      "git add"
+    ]
   },
   "author": "qefeng",
   "license": "ISC",
   "devDependencies": {
+    "@tencent/eslint-config-tencent": "^0.15.2",
+    "@tencent/stylelint-config-tencent": "^1.0.7",
     "@types/crypto-js": "^4.0.1",
     "@types/figma": "^1.0.3",
     "@types/lodash": "^4.14.161",
@@ -36,6 +45,7 @@
     "sass": "^1.32.0",
     "sass-loader": "^10.1.0",
     "style-loader": "^0.23.1",
+    "stylelint": "^13.13.1",
     "ts-loader": "^6.0.4",
     "typescript": "^3.9.7",
     "url-loader": "^2.1.0",
@@ -47,8 +57,9 @@
   "dependencies": {
     "@octokit/core": "^3.2.4",
     "@types/fabric": "^3.6.9",
+    "ini": "^2.0.0",
     "js-base64": "^3.6.0",
-    "lodash": "^4.17.20",
+    "lodash": "^4.17.21",
     "parse-github-url": "^1.0.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
